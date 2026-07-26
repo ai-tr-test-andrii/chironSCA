@@ -76,7 +76,10 @@ def cmd_ping():
 @app.route("/cmd/dns")
 def cmd_dns():
     domain = request.args.get("domain", "")
-    result = subprocess.check_output("nslookup " + domain, shell=True)
+    # Use argv list with shell=False to prevent command injection (CWE-77).
+    # The domain value is passed as a distinct argument to nslookup, so the
+    # shell never interprets it; metacharacters such as ; | & are inert.
+    result = subprocess.check_output(["nslookup", domain], shell=False)
     return Response(result, mimetype="text/plain")
 
 
