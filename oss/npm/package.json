@@ -21,7 +21,8 @@
   },
   "overrides": {
     "tar-fs": "^2.1.2",
-    "minimatch": "^3.1.4"
+    "minimatch": "^3.1.4",
+    "js-yaml": "^3.15.0"
   },
   "husky": {
     "hooks": {
